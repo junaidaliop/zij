@@ -11,10 +11,25 @@ requires-python = ">=3.10"
 license = { text = "Apache-2.0" }
 authors = [{ name = "Muhammad Junaid Ali Asif Raja" }]
 dependencies = ["torch>=2.12,<2.13"]
-keywords = ["optimization", "deep-learning", "optimizer", "pytorch"]
+keywords = ["optimization", "deep-learning", "optimizer", "pytorch", "machine-learning", "adam", "muon"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
 
 [project.urls]
+Homepage = "https://github.com/junaidaliop/zij"
 Repository = "https://github.com/junaidaliop/zij"
+Issues = "https://github.com/junaidaliop/zij/issues"
+
+[tool.setuptools]
+license-files = ["LICENSE", "THIRD_PARTY_NOTICES.md"]
 
 [tool.setuptools.packages.find]
 include = ["zij*"]
