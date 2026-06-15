@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "zij"
+version = "0.1.0"
+description = "A comprehensive library of deep learning optimizers"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "Apache-2.0" }
+authors = [{ name = "Muhammad Junaid Ali Asif Raja" }]
+dependencies = ["torch>=2.12,<2.13"]
+keywords = ["optimization", "deep-learning", "optimizer", "pytorch"]
+
+[project.urls]
+Repository = "https://github.com/junaidaliop/zij"
+
+[tool.setuptools.packages.find]
+include = ["zij*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+extend-exclude = ["zij/core"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I"]
+ignore = ["E501", "E741"]
