@@ -1,0 +1,26 @@
+cff-version: 1.2.0
+message: >-
+  If you use zij in your research, please cite it using the metadata below.
+  When you use a specific optimizer, please also cite its original paper, which
+  is linked in the corresponding Canon row and class docstring.
+title: "zij: A Canon and Library of Deep Learning Optimizers"
+abstract: >-
+  zij is a Canon of optimization algorithms for machine learning paired with an
+  installable PyTorch library implementing those with redistribution-compatible
+  sources.
+type: software
+version: "0.1.0"
+authors:
+  - family-names: "Raja"
+    given-names: "Muhammad Junaid Ali Asif"
+    orcid: "https://orcid.org/0009-0008-9249-9983"
+repository-code: "https://github.com/junaidaliop/zij"
+url: "https://github.com/junaidaliop/zij"
+license: Apache-2.0
+keywords:
+  - optimization
+  - deep learning
+  - optimizers
+  - fractional calculus
+  - memory-efficient training
+  - PyTorch
