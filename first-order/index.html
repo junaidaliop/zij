@@ -1,0 +1,2424 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A canon of deep learning optimization algorithms.">
+      
+      
+      
+        <link rel="canonical" href="https://junaidaliop.github.io/zij/first-order/">
+      
+      
+        <link rel="prev" href="..">
+      
+      
+        <link rel="next" href="../memory-efficient/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/favicon.ico">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>First-order - zij</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CFira+Code:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Fira Code"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#first-order-optimizers" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="zij" class="md-header__button md-logo" aria-label="zij" data-md-component="logo">
+      
+  <img src="../assets/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            zij
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              First-order
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="cyan"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="deep-purple" data-md-color-accent="cyan"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/junaidaliop/zij" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    junaidaliop/zij
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  
+  Canon
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="zij" class="md-nav__button md-logo" aria-label="zij" data-md-component="logo">
+      
+  <img src="../assets/logo.png" alt="logo">
+
+    </a>
+    zij
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/junaidaliop/zij" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    junaidaliop/zij
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Canon
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Canon
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    First-order
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../memory-efficient/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Memory-efficient
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fractional/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fractional-order
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../distributed/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Distributed
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../second-order/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Second-order
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../zeroth-order/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Zeroth-order
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../privacy-preserving/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Privacy-preserving
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sharpness-aware/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sharpness-aware
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../quantum/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quantum
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lr-free/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Learning-rate-free
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../schedulers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Schedulers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="first-order-optimizers">First-Order Optimizers<a class="headerlink" href="#first-order-optimizers" title="Permanent link">&para;</a></h1>
+<p>First-order optimizers update parameters using only gradients and accumulated gradient statistics such as momentum and second-moment estimates. This page covers the stochastic gradient descent lineage, the Adam family, and more recent sign-based and variance-reduced methods. The <code>zij</code> column gives the class name for optimizers already implemented in the package.</p>
+<table>
+<thead>
+<tr>
+<th>Optimizer</th>
+<th>Venue</th>
+<th>Paper</th>
+<th>Code</th>
+<th><code>zij</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../math/asgd/">ASGD</a></td>
+<td>SIAM Journal on Control and Optimization 1992</td>
+<td><a href="https://doi.org/10.1137/0330046">Acceleration of Stochastic Approximation by Averaging</a></td>
+<td><a href="https://github.com/pytorch/pytorch/blob/main/torch/optim/asgd.py">community</a></td>
+<td><code>ASGD</code></td>
+</tr>
+<tr>
+<td><a href="../math/rprop/">Rprop</a></td>
+<td>ICNN 1993</td>
+<td><a href="https://doi.org/10.1109/ICNN.1993.298623">A direct adaptive method for faster backpropagation learning: the RPROP algorithm</a></td>
+<td><a href="https://github.com/pytorch/pytorch/blob/main/torch/optim/rprop.py">community</a></td>
+<td><code>Rprop</code></td>
+</tr>
+<tr>
+<td><a href="../math/adagrad/">Adagrad</a></td>
+<td>JMLR 2011</td>
+<td><a href="https://jmlr.org/papers/v12/duchi11a.html">Adaptive Subgradient Methods for Online Learning and Stochastic Optimization</a></td>
+<td><a href="https://github.com/pytorch/pytorch/blob/main/torch/optim/adagrad.py">community</a></td>
+<td><code>Adagrad</code></td>
+</tr>
+<tr>
+<td><a href="../math/adadelta/">Adadelta</a></td>
+<td>arXiv 2012</td>
+<td><a href="https://arxiv.org/abs/1212.5701">ADADELTA: An Adaptive Learning Rate Method</a></td>
+<td><a href="https://github.com/pytorch/pytorch/blob/main/torch/optim/adadelta.py">community</a></td>
+<td><code>Adadelta</code></td>
+</tr>
+<tr>
+<td><a href="../math/rmsprop/">RMSprop</a></td>
+<td>Lecture notes 2012</td>
+<td><a href="https://www.cs.toronto.edu/~tijmen/csc321/slides/lecture_slides_lec6.pdf">Lecture 6.5-rmsprop: Divide the gradient by a running average of its recent magnitude</a></td>
+<td><a href="https://github.com/pytorch/pytorch/blob/main/torch/optim/rmsprop.py">community</a></td>
+<td><code>RMSprop</code></td>
+</tr>
+<tr>
+<td><a href="../math/ftrl/">FTRL</a></td>
+<td>KDD 2013</td>
+<td><a href="https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/41159.pdf">Ad Click Prediction: a View from the Trenches</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/sgd/">SGD</a></td>
+<td>ICML 2013</td>
+<td><a href="https://proceedings.mlr.press/v28/sutskever13.html">On the importance of initialization and momentum in deep learning</a></td>
+<td><a href="https://github.com/pytorch/pytorch/blob/main/torch/optim/sgd.py">community</a></td>
+<td><code>SGD</code></td>
+</tr>
+<tr>
+<td><a href="../math/adam/">Adam</a></td>
+<td>ICLR 2015</td>
+<td><a href="https://arxiv.org/abs/1412.6980">Adam: A Method for Stochastic Optimization</a></td>
+<td><a href="https://github.com/pytorch/pytorch/blob/main/torch/optim/adam.py">community</a></td>
+<td><code>Adam</code></td>
+</tr>
+<tr>
+<td><a href="../math/adamax/">AdaMax</a></td>
+<td>ICLR 2015</td>
+<td><a href="https://arxiv.org/abs/1412.6980">Adam: A Method for Stochastic Optimization</a></td>
+<td><a href="https://github.com/pytorch/pytorch/blob/main/torch/optim/adamax.py">community</a></td>
+<td><code>Adamax</code></td>
+</tr>
+<tr>
+<td><a href="../math/nadam/">Nadam</a></td>
+<td>ICLR Workshop 2016</td>
+<td><a href="https://openreview.net/forum?id=OM0jvwB8jIp57ZJjtNEZ">Incorporating Nesterov Momentum into Adam</a></td>
+<td><a href="https://github.com/pytorch/pytorch/blob/main/torch/optim/nadam.py">community</a></td>
+<td><code>NAdam</code></td>
+</tr>
+<tr>
+<td><a href="../math/lars/">LARS</a></td>
+<td>arXiv 2017</td>
+<td><a href="https://arxiv.org/abs/1708.03888">Large Batch Training of Convolutional Networks</a></td>
+<td><a href="https://github.com/huggingface/pytorch-image-models/blob/main/timm/optim/lars.py">community</a></td>
+<td><code>LARS</code></td>
+</tr>
+<tr>
+<td><a href="../math/swats/">SWATS</a></td>
+<td>arXiv 2017</td>
+<td><a href="https://arxiv.org/abs/1712.07628">Improving Generalization Performance by Switching from Adam to SGD</a></td>
+<td><a href="https://github.com/jettify/pytorch-optimizer/blob/master/torch_optimizer/swats.py">community</a></td>
+<td><code>SWATS</code></td>
+</tr>
+<tr>
+<td><a href="../math/a2graduni/">A2Grad</a></td>
+<td>arXiv 2018</td>
+<td><a href="https://arxiv.org/abs/1810.00553">Optimal Adaptive and Accelerated Stochastic Gradient Descent</a></td>
+<td><a href="https://github.com/severilov/A2Grad_optimizer">community</a></td>
+<td><code>A2GradUni</code>, <code>A2GradInc</code>, <code>A2GradExp</code></td>
+</tr>
+<tr>
+<td><a href="../math/accsgd/">AccSGD</a></td>
+<td>ICLR 2018</td>
+<td><a href="https://arxiv.org/abs/1803.05591">On the insufficiency of existing momentum schemes for Stochastic Optimization</a></td>
+<td><a href="https://github.com/rahulkidambi/AccSGD">official</a></td>
+<td><code>AccSGD</code></td>
+</tr>
+<tr>
+<td><a href="../math/amsgrad/">AMSGrad</a></td>
+<td>ICLR 2018</td>
+<td><a href="https://arxiv.org/abs/1904.09237">On the Convergence of Adam and Beyond</a></td>
+<td><a href="https://github.com/pytorch/pytorch/blob/main/torch/optim/adam.py">community</a></td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/gadam/">GADAM</a></td>
+<td>arXiv 2018</td>
+<td><a href="https://arxiv.org/abs/1805.07500">GADAM: Genetic-Evolutionary ADAM for Deep Neural Network Optimization</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/msvag/">M-SVAG</a></td>
+<td>ICML 2018</td>
+<td><a href="https://arxiv.org/abs/1705.07774">Dissecting Adam: The Sign, Magnitude and Variance of Stochastic Gradients</a></td>
+<td><a href="https://github.com/lballes/msvag">official</a></td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/pid/">PID</a></td>
+<td>CVPR 2018</td>
+<td><a href="https://openaccess.thecvf.com/content_cvpr_2018/html/An_A_PID_Controller_CVPR_2018_paper.html">A PID Controller Approach for Stochastic Optimization of Deep Networks</a></td>
+<td><a href="https://github.com/tensorboy/PIDOptimizer">official</a></td>
+<td><code>PID</code></td>
+</tr>
+<tr>
+<td><a href="../math/vrsgd/">VR-SGD</a></td>
+<td>IEEE TKDE 2018</td>
+<td><a href="https://arxiv.org/abs/1802.09932">VR-SGD: A Simple Stochastic Variance Reduction Method for Machine Learning</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/yogi/">Yogi</a></td>
+<td>NeurIPS 2018</td>
+<td><a href="https://papers.nips.cc/paper_files/paper/2018/hash/90365351ccc7437a1309dc64e4db32a3-Abstract.html">Adaptive Methods for Nonconvex Optimization</a></td>
+<td><a href="https://github.com/jettify/pytorch-optimizer/blob/master/torch_optimizer/yogi.py">community</a></td>
+<td><code>Yogi</code></td>
+</tr>
+<tr>
+<td><a href="../math/adabound/">AdaBound</a></td>
+<td>ICLR 2019</td>
+<td><a href="https://arxiv.org/abs/1902.09843">Adaptive Gradient Methods with Dynamic Bound of Learning Rate</a></td>
+<td><a href="https://github.com/Luolc/AdaBound">official</a></td>
+<td><code>AdaBound</code>, <code>AdaBoundW</code></td>
+</tr>
+<tr>
+<td><a href="../math/adamod/">AdaMod</a></td>
+<td>arXiv 2019</td>
+<td><a href="https://arxiv.org/abs/1910.12249">An Adaptive and Momental Bound Method for Stochastic Learning</a></td>
+<td><a href="https://github.com/lancopku/AdaMod">official</a></td>
+<td><code>AdaMod</code></td>
+</tr>
+<tr>
+<td><a href="../math/adamw/">AdamW</a></td>
+<td>ICLR 2019</td>
+<td><a href="https://arxiv.org/abs/1711.05101">Decoupled Weight Decay Regularization</a></td>
+<td><a href="https://github.com/loshchil/AdamW-and-SGDW">official</a></td>
+<td><code>AdamW</code></td>
+</tr>
+<tr>
+<td><a href="../math/adashift/">AdaShift</a></td>
+<td>ICLR 2019</td>
+<td><a href="https://arxiv.org/abs/1810.00143">AdaShift: Decorrelation and Convergence of Adaptive Learning Rate Methods</a></td>
+<td><a href="https://github.com/mknbv/adashift">community</a></td>
+<td><code>AdaShift</code></td>
+</tr>
+<tr>
+<td><a href="../math/aggmo/">AggMo</a></td>
+<td>ICLR 2019</td>
+<td><a href="https://arxiv.org/abs/1804.00325">Aggregated Momentum: Stability Through Passive Damping</a></td>
+<td><a href="https://github.com/AtheMathmo/AggMo">official</a></td>
+<td><code>AggMo</code></td>
+</tr>
+<tr>
+<td><a href="../math/avagrad/">AvaGrad</a></td>
+<td>arXiv 2019</td>
+<td><a href="https://arxiv.org/abs/1912.01823">Domain-independent Dominance of Adaptive Methods</a></td>
+<td><a href="https://github.com/lolemacs/avagrad">official</a></td>
+<td><code>AvaGrad</code></td>
+</tr>
+<tr>
+<td><a href="../math/hadam/">HAdam</a></td>
+<td>NeurIPS Workshop 2019</td>
+<td><a href="https://arxiv.org/abs/1910.06878">On Higher-order Moments in Adam</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/hyperadam/">HyperAdam</a></td>
+<td>AAAI 2019</td>
+<td><a href="https://arxiv.org/abs/1811.08996">HyperAdam: A Learnable Task-Adaptive Adam for Network Training</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/lookahead/">Lookahead</a></td>
+<td>NeurIPS 2019</td>
+<td><a href="https://arxiv.org/abs/1907.08610">Lookahead Optimizer: k steps forward, 1 step back</a></td>
+<td><a href="https://github.com/alphadl/lookahead.pytorch">community</a></td>
+<td><code>Lookahead</code></td>
+</tr>
+<tr>
+<td><a href="../math/nosadam/">NosAdam</a></td>
+<td>IJCAI 2019</td>
+<td><a href="https://arxiv.org/abs/1805.07557">Nostalgic Adam: Weighting more of the past gradients when designing the adaptive learning rate</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/novograd/">NovoGrad</a></td>
+<td>arXiv 2019</td>
+<td><a href="https://arxiv.org/abs/1905.11286">Stochastic Gradient Methods with Layer-wise Adaptive Moments for Training of Deep Networks</a></td>
+<td><a href="https://github.com/huggingface/pytorch-image-models/blob/main/timm/optim/nvnovograd.py">community</a></td>
+<td><code>NovoGrad</code></td>
+</tr>
+<tr>
+<td><a href="../math/qhadam/">QHAdam / QHM</a></td>
+<td>ICLR 2019</td>
+<td><a href="https://arxiv.org/abs/1810.06801">Quasi-hyperbolic momentum and Adam for deep learning</a></td>
+<td><a href="https://github.com/facebookresearch/qhoptim">official</a></td>
+<td><code>QHAdam</code>, <code>QHM</code></td>
+</tr>
+<tr>
+<td><a href="../math/ranger/">Ranger</a></td>
+<td>—</td>
+<td>RAdam and Lookahead combination</td>
+<td><a href="https://github.com/lessw2020/Ranger-Deep-Learning-Optimizer">official</a></td>
+<td><code>Ranger</code></td>
+</tr>
+<tr>
+<td><a href="../math/sadam/">Sadam</a></td>
+<td>arXiv 2019</td>
+<td><a href="https://arxiv.org/abs/1908.00700">Calibrating the Adaptive Learning Rate to Improve Convergence of ADAM</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/adabelief/">AdaBelief</a></td>
+<td>NeurIPS 2020</td>
+<td><a href="https://arxiv.org/abs/2010.07468">AdaBelief Optimizer: Adapting Stepsizes by the Belief in Observed Gradients</a></td>
+<td><a href="https://github.com/juntang-zhuang/Adabelief-Optimizer">official</a></td>
+<td><code>AdaBelief</code></td>
+</tr>
+<tr>
+<td><a href="../math/adam-v/">Adam+</a></td>
+<td>arXiv 2020</td>
+<td><a href="https://arxiv.org/abs/2011.11985">Adam+: A Stochastic Method with Adaptive Variance Reduction</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/adambs/">AdamBS</a></td>
+<td>NeurIPS 2020</td>
+<td><a href="https://arxiv.org/abs/2010.12986">Adam with Bandit Sampling for Deep Learning</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/adasgd/">AdaSGD</a></td>
+<td>arXiv 2020</td>
+<td><a href="https://arxiv.org/abs/2006.16541">AdaSGD: Bridging the gap between SGD and Adam</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/cayleysgd/">Cayley SGD</a></td>
+<td>ICLR 2020</td>
+<td><a href="https://arxiv.org/abs/2002.01113">Efficient Riemannian Optimization on the Stiefel Manifold via the Cayley Transform</a></td>
+<td><a href="https://github.com/JunLi-Galios/Optimization-on-Stiefel-Manifold-via-Cayley-Transform">official</a></td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/clippedsgd/">clipped-SGD</a></td>
+<td>NeurIPS 2020</td>
+<td><a href="https://arxiv.org/abs/2005.10785">Stochastic Optimization with Heavy-Tailed Noise via Accelerated Gradient Clipping</a></td>
+<td><a href="https://github.com/eduardgorbunov/accelerated_clipping">official</a></td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/deam/">DEAM</a></td>
+<td>ASONAM 2020</td>
+<td><a href="https://arxiv.org/abs/1907.11307">DEAM: Adaptive Momentum with Discriminative Weight for Stochastic Optimization</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/diffgrad/">diffGrad</a></td>
+<td>IEEE TNNLS 2020</td>
+<td><a href="https://arxiv.org/abs/1909.11015">diffGrad: An Optimization Method for Convolutional Neural Networks</a></td>
+<td><a href="https://github.com/shivram1987/diffGrad">official</a></td>
+<td><code>DiffGrad</code></td>
+</tr>
+<tr>
+<td><a href="../math/eadam/">EAdam</a></td>
+<td>arXiv 2020</td>
+<td><a href="https://arxiv.org/abs/2011.02150">EAdam Optimizer: How ε Impact Adam</a></td>
+<td><a href="https://github.com/yuanwei2019/EAdam-optimizer">official</a></td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/fromage/">Fromage</a></td>
+<td>NeurIPS 2020</td>
+<td><a href="https://arxiv.org/abs/2002.03432">On the distance between two neural networks and the stability of learning</a></td>
+<td><a href="https://github.com/jxbz/fromage">official</a></td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/gradientcentralizationgc/">Gradient Centralization (GC)</a></td>
+<td>ECCV 2020</td>
+<td><a href="https://arxiv.org/abs/2004.01461">Gradient Centralization: A New Optimization Technique for Deep Neural Networks</a></td>
+<td><a href="https://github.com/Yonghongwei/Gradient-Centralization">official</a></td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/lamb/">LAMB</a></td>
+<td>ICLR 2020</td>
+<td><a href="https://arxiv.org/abs/1904.00962">Large Batch Optimization for Deep Learning: Training BERT in 76 minutes</a></td>
+<td><a href="https://github.com/huggingface/pytorch-image-models/blob/main/timm/optim/lamb.py">community</a></td>
+<td><code>Lamb</code></td>
+</tr>
+<tr>
+<td><a href="../math/laprop/">LaProp</a></td>
+<td>arXiv 2020</td>
+<td><a href="https://arxiv.org/abs/2002.04839">LaProp: Separating Momentum and Adaptivity in Adam</a></td>
+<td><a href="https://github.com/Z-T-WANG/LaProp-Optimizer">official</a></td>
+<td><code>LaProp</code></td>
+</tr>
+<tr>
+<td><a href="../math/nigt/">NIGT</a></td>
+<td>ICML 2020</td>
+<td><a href="https://arxiv.org/abs/2002.03305">Momentum Improves Normalized SGD</a></td>
+<td><a href="https://github.com/google-research/google-research/tree/master/nigt_optimizer">official</a></td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/padam/">Padam</a></td>
+<td>IJCAI 2020</td>
+<td><a href="https://arxiv.org/abs/1806.06763">Closing the Generalization Gap of Adaptive Gradient Methods in Training Deep Neural Networks</a></td>
+<td><a href="https://github.com/uclaml/Padam">official</a></td>
+<td><code>PAdam</code></td>
+</tr>
+<tr>
+<td><a href="../math/signsgd/">signSGD</a></td>
+<td>ICML 2018</td>
+<td><a href="https://arxiv.org/abs/1802.04434">signSGD: Compressed Optimisation for Non-Convex Problems</a></td>
+<td><a href="https://github.com/kozistr/pytorch_optimizer">community</a></td>
+<td><code>SignSGD</code></td>
+</tr>
+<tr>
+<td><a href="../math/pbsgd/">pbSGD</a></td>
+<td>IJCAI 2020</td>
+<td><a href="https://www.ijcai.org/proceedings/2020/451">pbSGD: Powered Stochastic Gradient Descent Methods for Accelerated Non-Convex Optimization</a></td>
+<td><a href="https://github.com/HAIRLAB/pbSGD">official</a></td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/pcgrad/">PCGrad</a></td>
+<td>NeurIPS 2020</td>
+<td><a href="https://arxiv.org/abs/2001.06782">Gradient Surgery for Multi-Task Learning</a></td>
+<td><a href="https://github.com/tianheyu927/PCGrad">official</a></td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/radam/">RAdam</a></td>
+<td>ICLR 2020</td>
+<td><a href="https://arxiv.org/abs/1908.03265">On the Variance of the Adaptive Learning Rate and Beyond</a></td>
+<td><a href="https://github.com/LiyuanLucasLiu/RAdam">official</a></td>
+<td><code>RAdam</code></td>
+</tr>
+<tr>
+<td><a href="../math/sgdg2/">SGD-G2</a></td>
+<td>ICPR 2020</td>
+<td><a href="https://arxiv.org/abs/2002.09304">Stochastic Runge-Kutta methods and adaptive SGD-G2 stochastic gradient descent</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/acmo/">ACMo</a></td>
+<td>AAAI 2021</td>
+<td><a href="https://arxiv.org/abs/2006.07065">ACMo: Angle-Calibrated Moment Methods for Stochastic Optimization</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/acprop/">ACProp</a></td>
+<td>NeurIPS 2021</td>
+<td><a href="https://arxiv.org/abs/2110.05454">Momentum Centering and Asynchronous Update for Adaptive Gradient Methods</a></td>
+<td><a href="https://github.com/juntang-zhuang/ACProp-Optimizer">official</a></td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/adal/">AdaL</a></td>
+<td>arXiv 2021</td>
+<td><a href="https://arxiv.org/abs/2107.01525">AdaL: Adaptive Gradient Transformation Contributes to Convergences and Generalizations</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/adamd/">AdamD</a></td>
+<td>arXiv 2021</td>
+<td><a href="https://arxiv.org/abs/2110.10828">AdamD: Improved bias-correction in Adam</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/adamp/">AdamP</a></td>
+<td>ICLR 2021</td>
+<td><a href="https://arxiv.org/abs/2006.08217">AdamP: Slowing Down the Slowdown for Momentum Optimizers on Scale-invariant Weights</a></td>
+<td><a href="https://github.com/clovaai/AdamP">official</a></td>
+<td><code>AdamP</code></td>
+</tr>
+<tr>
+<td><a href="../math/adaptivegradientclippingagc/">Adaptive Gradient Clipping (AGC)</a></td>
+<td>ICML 2021</td>
+<td><a href="https://arxiv.org/abs/2102.06171">High-Performance Large-Scale Image Recognition Without Normalization</a></td>
+<td><a href="https://github.com/google-deepmind/deepmind-research/tree/master/nfnets">official</a></td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/angulargrad/">AngularGrad</a></td>
+<td>arXiv 2021</td>
+<td><a href="https://arxiv.org/abs/2105.10190">AngularGrad: A New Optimization Technique for Angular Convergence of Convolutional Neural Networks</a></td>
+<td><a href="https://github.com/mhaut/AngularGrad">official</a></td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/bgadam/">BGADAM</a></td>
+<td>IJCNN 2021</td>
+<td><a href="https://arxiv.org/abs/1908.08015">BGADAM: Boosting based Genetic-Evolutionary ADAM for Neural Network Optimization</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/gravity/">Gravity</a></td>
+<td>arXiv 2021</td>
+<td><a href="https://arxiv.org/abs/2101.09192">Gravity Optimizer: a Kinematic Approach on Optimization in Deep Learning</a></td>
+<td><a href="https://github.com/dariush-bahrami/gravity.optimizer">official</a></td>
+<td><code>Gravity</code></td>
+</tr>
+<tr>
+<td><a href="../math/madgrad/">MADGRAD</a></td>
+<td>arXiv 2021</td>
+<td><a href="https://arxiv.org/abs/2101.11075">Adaptivity without Compromise: A Momentumized, Adaptive, Dual Averaged Gradient Method for Stochastic Optimization</a></td>
+<td><a href="https://github.com/facebookresearch/madgrad">official</a></td>
+<td><code>MADGRAD</code>, <code>MirrorMADGRAD</code></td>
+</tr>
+<tr>
+<td><a href="../math/maxva/">MaxVA</a></td>
+<td>ECML PKDD 2021</td>
+<td><a href="https://arxiv.org/abs/2006.11918">MaxVA: Fast Adaptation of Step Sizes by Maximizing Observed Variance of Gradients</a></td>
+<td><a href="https://github.com/zhuchen03/MaxVA">official</a></td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/nero/">Nero</a></td>
+<td>ICML 2021</td>
+<td><a href="https://arxiv.org/abs/2102.07227">Learning by Turning: Neural Architecture Aware Optimisation</a></td>
+<td><a href="https://github.com/jxbz/nero">official</a></td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/pnm/">PNM</a></td>
+<td>ICML 2021</td>
+<td><a href="https://arxiv.org/abs/2103.17182">Positive-Negative Momentum: Manipulating Stochastic Gradient Noise to Improve Generalization</a></td>
+<td><a href="https://github.com/zeke-xie/Positive-Negative-Momentum">official</a></td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/adapnm/">AdaPNM</a></td>
+<td>ICML 2021</td>
+<td><a href="https://arxiv.org/abs/2103.17182">Positive-Negative Momentum: Manipulating Stochastic Gradient Noise to Improve Generalization</a></td>
+<td><a href="https://github.com/zeke-xie/Positive-Negative-Momentum">official</a></td>
+<td><code>AdaPNM</code></td>
+</tr>
+<tr>
+<td><a href="../math/ranger21/">Ranger21</a></td>
+<td>arXiv 2021</td>
+<td><a href="https://arxiv.org/abs/2106.13731">Ranger21: a synergistic deep learning optimizer</a></td>
+<td><a href="https://github.com/lessw2020/Ranger21">official</a></td>
+<td><code>Ranger21</code></td>
+</tr>
+<tr>
+<td><a href="../math/sgdp/">SGDP</a></td>
+<td>ICLR 2021</td>
+<td><a href="https://arxiv.org/abs/2006.08217">AdamP: Slowing Down the Slowdown for Momentum Optimizers on Scale-invariant Weights</a></td>
+<td><a href="https://github.com/clovaai/AdamP">official</a></td>
+<td><code>SGDP</code></td>
+</tr>
+<tr>
+<td><a href="../math/adafamily/">AdaFamily</a></td>
+<td>arXiv 2022</td>
+<td><a href="https://arxiv.org/abs/2203.01603">AdaFamily: A family of Adam-like adaptive gradient methods</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/adai/">Adai</a></td>
+<td>ICML 2022</td>
+<td><a href="https://arxiv.org/abs/2006.15815">Adaptive Inertia: Disentangling the Effects of Adaptive Learning Rate and Momentum</a></td>
+<td><a href="https://github.com/zeke-xie/adaptive-inertia-adai">official</a></td>
+<td><code>Adai</code></td>
+</tr>
+<tr>
+<td><a href="../math/adammc/">AdamMC</a></td>
+<td>CVMI 2022</td>
+<td><a href="https://arxiv.org/abs/2207.09066">Moment Centralization based Gradient Descent Optimizers for Convolutional Neural Networks</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/adan/">Adan</a></td>
+<td>arXiv 2022</td>
+<td><a href="https://arxiv.org/abs/2208.06677">Adan: Adaptive Nesterov Momentum Algorithm for Faster Optimizing Deep Models</a></td>
+<td><a href="https://github.com/sail-sg/Adan">official</a></td>
+<td><code>Adan</code></td>
+</tr>
+<tr>
+<td><a href="../math/adasmooth/">AdaSmooth</a></td>
+<td>arXiv 2022</td>
+<td><a href="https://arxiv.org/abs/2204.00825">AdaSmooth: An Adaptive Learning Rate Method based on Effective Ratio</a></td>
+<td>—</td>
+<td><code>AdaSmooth</code></td>
+</tr>
+<tr>
+<td><a href="../math/aegdm/">AEGDM</a></td>
+<td>Annals of Applied Mathematics 2022</td>
+<td><a href="https://arxiv.org/abs/2203.12191">An Adaptive Gradient Method with Energy and Momentum</a></td>
+<td><a href="https://github.com/txping/AEGDM">official</a></td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/amos/">Amos</a></td>
+<td>arXiv 2022</td>
+<td><a href="https://arxiv.org/abs/2210.11693">Amos: An Adam-style Optimizer with Adaptive Weight Decay towards Model-Oriented Scale</a></td>
+<td><a href="https://github.com/google-research/jestimator">official</a></td>
+<td><code>Amos</code></td>
+</tr>
+<tr>
+<td><a href="../math/gdaam/">GDA-AM</a></td>
+<td>ICLR 2022</td>
+<td><a href="https://arxiv.org/abs/2110.02457">GDA-AM: On the effectiveness of solving minimax optimization via Anderson Acceleration</a></td>
+<td><a href="https://github.com/hehuannb/GDA-AM">official</a></td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/koala/">KOALA</a></td>
+<td>AAAI 2022</td>
+<td><a href="https://arxiv.org/abs/2107.03331">KOALA: A Kalman Optimization Algorithm with Loss Adaptivity</a></td>
+<td><a href="https://github.com/Araachie/koala">official</a></td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/rotograd/">RotoGrad</a></td>
+<td>ICLR 2022</td>
+<td><a href="https://arxiv.org/abs/2103.02631">RotoGrad: Gradient Homogenization in Multitask Learning</a></td>
+<td><a href="https://github.com/adrianjav/rotograd">official</a></td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/srsgd/">SRSGD</a></td>
+<td>SIAM Journal on Imaging Sciences 2022</td>
+<td><a href="https://arxiv.org/abs/2002.10583">Scheduled Restart Momentum for Accelerated Stochastic Gradient Descent</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/steptunedsgd/">Step-Tuned SGD</a></td>
+<td>Neural Processing Letters 2022</td>
+<td><a href="https://arxiv.org/abs/2103.03570">Second-order step-size tuning of SGD for non-convex optimization</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/adainject/">AdaInject</a></td>
+<td>IEEE TAI 2023</td>
+<td><a href="https://arxiv.org/abs/2109.12504">AdaInject: Injection Based Adaptive Gradient Descent Optimizers for Convolutional Neural Networks</a></td>
+<td><a href="https://github.com/shivram1987/AdaInject">official</a></td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/adanorm/">AdaNorm</a></td>
+<td>WACV 2023</td>
+<td><a href="https://arxiv.org/abs/2210.06364">AdaNorm: Adaptive Gradient Norm Correction based Optimizer for CNNs</a></td>
+<td><a href="https://github.com/shivram1987/AdaNorm">official</a></td>
+<td><code>AdaNorm</code></td>
+</tr>
+<tr>
+<td><a href="../math/agd/">AGD</a></td>
+<td>NeurIPS 2023</td>
+<td><a href="https://arxiv.org/abs/2312.01658">AGD: an Auto-switchable Optimizer using Stepwise Gradient Difference for Preconditioning Matrix</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/aida/">Aida</a></td>
+<td>TMLR 2023</td>
+<td><a href="https://arxiv.org/abs/2203.13273">A DNN Optimizer that Improves over AdaBelief by Suppression of the Adaptive Stepsize Range</a></td>
+<td><a href="https://github.com/guoqiang-zhang-x/Aida-Optimizer">official</a></td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/lion/">Lion</a></td>
+<td>NeurIPS 2023</td>
+<td><a href="https://arxiv.org/abs/2302.06675">Symbolic Discovery of Optimization Algorithms</a></td>
+<td><a href="https://github.com/google/automl/tree/master/lion">official</a></td>
+<td><code>Lion</code></td>
+</tr>
+<tr>
+<td><a href="../math/lookaround/">Lookaround</a></td>
+<td>NeurIPS 2023</td>
+<td><a href="https://arxiv.org/abs/2306.07684">Lookaround Optimizer: k steps around, 1 step average</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/multiadam/">MultiAdam</a></td>
+<td>ICML 2023</td>
+<td><a href="https://arxiv.org/abs/2306.02816">MultiAdam: Parameter-wise Scale-invariant Optimizer for Multiscale Training of Physics-informed Neural Networks</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/rlekf/">RLEKF</a></td>
+<td>AAAI 2023</td>
+<td><a href="https://arxiv.org/abs/2212.06989">RLEKF: An Optimizer for Deep Potential with Ab Initio Accuracy</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/scheduledweightdecayswd/">Scheduled Weight Decay (SWD)</a></td>
+<td>NeurIPS 2023</td>
+<td><a href="https://arxiv.org/abs/2011.11152">On the Overlooked Pitfalls of Weight Decay and How to Mitigate Them: A Gradient-Norm Perspective</a></td>
+<td><a href="https://github.com/zeke-xie/stable-weight-decay-regularization">official</a></td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/sgdf/">SGDF</a></td>
+<td>arXiv 2023</td>
+<td><a href="https://arxiv.org/abs/2311.02818">Signal Processing Meets SGD: From Momentum to Filter</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/stableadamw/">StableAdamW</a></td>
+<td>NeurIPS 2023</td>
+<td><a href="https://arxiv.org/abs/2304.13013">Stable and low-precision training for large-scale vision-language models</a></td>
+<td><a href="https://github.com/kozistr/pytorch_optimizer">community</a></td>
+<td><code>StableAdamW</code></td>
+</tr>
+<tr>
+<td><a href="../math/adaact/">AdaAct</a></td>
+<td>ICDMW 2024</td>
+<td><a href="https://arxiv.org/abs/2506.08353">An Adaptive Method Stabilizing Activations for Enhanced Generalization</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/adamatan2/">Adam-atan2</a></td>
+<td>ICML 2024</td>
+<td><a href="https://arxiv.org/abs/2407.05872">Scaling Exponents Across Parameterizations and Optimizers</a></td>
+<td><a href="https://github.com/lucidrains/adam-atan2-pytorch">community</a></td>
+<td><code>AdamAtan2</code></td>
+</tr>
+<tr>
+<td><a href="../math/adamrel/">Adam-Rel</a></td>
+<td>NeurIPS 2024</td>
+<td><a href="https://arxiv.org/abs/2412.17113">Adam on Local Time: Addressing Nonstationarity in RL with Relative Adam Timesteps</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/ademamix/">AdEMAMix</a></td>
+<td>arXiv 2024</td>
+<td><a href="https://arxiv.org/abs/2409.03137">The AdEMAMix Optimizer: Better, Faster, Older</a></td>
+<td><a href="https://github.com/apple/ml-ademamix">official</a></td>
+<td><code>AdEMAMix</code></td>
+</tr>
+<tr>
+<td><a href="../math/adopt/">ADOPT</a></td>
+<td>NeurIPS 2024</td>
+<td><a href="https://arxiv.org/abs/2411.02853">ADOPT: Modified Adam Can Converge with Any β₂ with the Optimal Rate</a></td>
+<td><a href="https://github.com/iShohei220/adopt">official</a></td>
+<td><code>ADOPT</code></td>
+</tr>
+<tr>
+<td><a href="../math/agsgd/">AGS-GD</a></td>
+<td>arXiv 2024</td>
+<td><a href="https://arxiv.org/abs/2411.11747">Anisotropic Gaussian Smoothing for Gradient-based Optimization</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/badm/">BADM</a></td>
+<td>arXiv 2024</td>
+<td><a href="https://arxiv.org/abs/2407.01640">BADM: Batch ADMM for Deep Learning</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/caadam/">CaAdam</a></td>
+<td>arXiv 2024</td>
+<td><a href="https://arxiv.org/abs/2410.24216">CaAdam: Improving Adam optimizer using connection aware methods</a></td>
+<td><a href="https://github.com/remigenet/CaAdam">official</a></td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/cadam/">CAdam</a></td>
+<td>arXiv 2024</td>
+<td><a href="https://arxiv.org/abs/2411.19647">CAdam: Confidence-Based Optimization for Online Learning</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/cautiousoptimizers/">Cautious Optimizers</a></td>
+<td>arXiv 2024</td>
+<td><a href="https://arxiv.org/abs/2411.16085">Cautious Optimizers: Improving Training with One Line of Code</a></td>
+<td><a href="https://github.com/kyleliang919/C-Optim">official</a></td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/exadam/">EXAdam</a></td>
+<td>arXiv 2024</td>
+<td><a href="https://arxiv.org/abs/2412.20302">EXAdam: The Power of Adaptive Cross-Moments</a></td>
+<td><a href="https://github.com/AhmedMostafa16/EXAdam">official</a></td>
+<td><code>EXAdam</code></td>
+</tr>
+<tr>
+<td><a href="../math/fadam/">FAdam</a></td>
+<td>arXiv 2024</td>
+<td><a href="https://arxiv.org/abs/2405.12807">FAdam: Adam is a natural gradient optimizer using diagonal empirical Fisher information</a></td>
+<td><a href="https://github.com/lessw2020/FAdam_PyTorch">community</a></td>
+<td><code>FAdam</code></td>
+</tr>
+<tr>
+<td><a href="../math/grokadamw/">GrokAdamW</a></td>
+<td>—</td>
+<td>AdamW variant with Grokfast-style gradient amplification</td>
+<td><a href="https://github.com/QuixiAI/grokadamw">official</a></td>
+<td><code>GrokAdamW</code></td>
+</tr>
+<tr>
+<td><a href="../math/grokfast/">Grokfast</a></td>
+<td>arXiv 2024</td>
+<td><a href="https://arxiv.org/abs/2405.20233">Grokfast: Accelerated Grokking by Amplifying Slow Gradients</a></td>
+<td><a href="https://github.com/ironjr/grokfast">official</a></td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/innaprop/">INNAprop</a></td>
+<td>arXiv 2024</td>
+<td><a href="https://arxiv.org/abs/2410.05871">A second-order-like optimizer with adaptive gradient scaling for deep learning</a></td>
+<td><a href="https://github.com/innaprop/innaprop">official</a></td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/kate/">KATE</a></td>
+<td>NeurIPS 2024</td>
+<td><a href="https://arxiv.org/abs/2403.02648">Remove that Square Root: A New Efficient Scale-Invariant Version of AdaGrad</a></td>
+<td><a href="https://github.com/nazya/KATE">official</a></td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/mada/">MADA</a></td>
+<td>ICML 2024</td>
+<td><a href="https://arxiv.org/abs/2401.08893">MADA: Meta-Adaptive Optimizers through hyper-gradient Descent</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/rsgdm/">RSGDM</a></td>
+<td>CCSB 2024</td>
+<td><a href="https://arxiv.org/abs/2409.15314">Reducing Bias in Deep Learning Optimization: The RSGDM Approach</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/setadam/">SET-Adam</a></td>
+<td>ECML PKDD 2024</td>
+<td><a href="https://arxiv.org/abs/2302.01029">On Suppressing Range of Adaptive Stepsizes of Adam to Improve Generalisation Performance</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/sngm/">SNGM</a></td>
+<td>Science China Information Sciences 2024</td>
+<td><a href="https://arxiv.org/abs/2007.13985">Stochastic Normalized Gradient Descent with Momentum for Large-Batch Training</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/srmm/">SRMM</a></td>
+<td>JMLR 2024</td>
+<td><a href="https://arxiv.org/abs/2201.01652">Stochastic regularized majorization-minimization with weakly convex and multi-convex surrogates</a></td>
+<td><a href="https://github.com/HanbaekLyu/SRMM">official</a></td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/tam/">TAM</a></td>
+<td>arXiv 2024</td>
+<td><a href="https://arxiv.org/abs/2412.18790">Torque-Aware Momentum</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/warpadam/">WarpAdam</a></td>
+<td>arXiv 2024</td>
+<td><a href="https://arxiv.org/abs/2409.04244">WarpAdam: A new Adam optimizer based on Meta-Learning approach</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/abssadmm/">AbsSADMM</a></td>
+<td>arXiv 2025</td>
+<td><a href="https://arxiv.org/abs/2505.06921">Stochastic ADMM with batch size adaptation for nonconvex nonsmooth optimization</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/adamc/">AdamC</a></td>
+<td>arXiv 2025</td>
+<td><a href="https://arxiv.org/abs/2506.02285">Why Gradients Rapidly Increase Near the End of Training</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/adamnx/">AdamNX</a></td>
+<td>arXiv 2025</td>
+<td><a href="https://arxiv.org/abs/2511.13465">AdamNX: An Adam improvement algorithm based on a novel exponential decay mechanism for the second-order moment estimate</a></td>
+<td><a href="https://github.com/mengzhu0308/AdamNX">official</a></td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/adams/">AdamS</a></td>
+<td>EMNLP 2025</td>
+<td><a href="https://arxiv.org/abs/2505.16363">AdamS: Momentum Itself Can Be A Normalizer for LLM Pretraining and Post-training</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/adanapg/">adaNAPG</a></td>
+<td>arXiv 2025</td>
+<td><a href="https://arxiv.org/abs/2507.18277">Boosting Accelerated Proximal Gradient Method with Adaptive Sampling for Stochastic Composite Optimization</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/ano/">Ano</a></td>
+<td>arXiv 2025</td>
+<td><a href="https://arxiv.org/abs/2508.18258">ANO : Faster is Better in Noisy Landscape</a></td>
+<td><a href="https://github.com/adrienkegreisz/ano-optimizer">official</a></td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/bcos/">BCOS</a></td>
+<td>arXiv 2025</td>
+<td><a href="https://arxiv.org/abs/2507.08963">Stochastic Approximation with Block Coordinate Optimal Stepsizes</a></td>
+<td><a href="https://github.com/facebookresearch/bcos">official</a></td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/cautiousweightdecay/">Cautious Weight Decay</a></td>
+<td>arXiv 2025</td>
+<td><a href="https://arxiv.org/abs/2510.12402">Cautious Weight Decay</a></td>
+<td><a href="https://github.com/kozistr/pytorch_optimizer">community</a></td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/conda/">Conda</a></td>
+<td>arXiv 2025</td>
+<td><a href="https://arxiv.org/abs/2509.24218">Conda: Column-Normalized Adam for Training Large Language Models Faster</a></td>
+<td><a href="https://github.com/jie040109/Conda">official</a></td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/coupledadam/">Coupled Adam</a></td>
+<td>ACL 2025</td>
+<td><a href="https://arxiv.org/abs/2502.08441">Better Embeddings with Coupled Adam</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/decgd/">DecGD</a></td>
+<td>Machine Learning 2025</td>
+<td><a href="https://arxiv.org/abs/2107.08377">A New Adaptive Gradient Method with Gradient Decomposition</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/deo/">DEO</a></td>
+<td>arXiv 2025</td>
+<td><a href="https://arxiv.org/abs/2507.19968">Dimer-Enhanced Optimization: A First-Order Approach to Escaping Saddle Points in Neural Network Training</a></td>
+<td><a href="https://github.com/YueHuLab/DimerTrainer">official</a></td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/emonavi/">EmoNavi</a></td>
+<td>—</td>
+<td>An emotion-driven optimizer that feels loss and navigates accordingly</td>
+<td><a href="https://github.com/muooon/EmoNavi">official</a></td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/mars/">MARS</a></td>
+<td>ICML 2025</td>
+<td><a href="https://arxiv.org/abs/2411.10438">MARS: Unleashing the Power of Variance Reduction for Training Large Models</a></td>
+<td><a href="https://github.com/AGI-Arena/MARS">official</a></td>
+<td><code>MARS</code></td>
+</tr>
+<tr>
+<td><a href="../math/focus/">FOCUS</a></td>
+<td>arXiv 2025</td>
+<td><a href="https://arxiv.org/abs/2501.12243">FOCUS: First Order Concentrated Updating Scheme</a></td>
+<td><a href="https://github.com/liuyz0/FOCUS">official</a></td>
+<td><code>FOCUS</code></td>
+</tr>
+<tr>
+<td><a href="../math/fsgdm/">FSGDM</a></td>
+<td>ICLR 2025</td>
+<td><a href="https://arxiv.org/abs/2411.19671">On the Performance Analysis of Momentum Method: A Frequency Domain Perspective</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/grams/">Grams</a></td>
+<td>ICLR Workshop 2025</td>
+<td><a href="https://arxiv.org/abs/2412.17107">Grams: Gradient Descent with Adaptive Momentum Scaling</a></td>
+<td><a href="https://github.com/Gunale0926/Grams">official</a></td>
+<td><code>Grams</code></td>
+</tr>
+<tr>
+<td><a href="../math/hgm/">HGM</a></td>
+<td>arXiv 2025</td>
+<td><a href="https://arxiv.org/abs/2506.22479">Hindsight-Guided Momentum (HGM) Optimizer: An Approach to Adaptive Learning Rate</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/hvadam/">HVAdam</a></td>
+<td>AAAI 2025</td>
+<td><a href="https://arxiv.org/abs/2511.20277">HVAdam: A Full-Dimension Adaptive Optimizer</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/ko/">KO</a></td>
+<td>arXiv 2025</td>
+<td><a href="https://arxiv.org/abs/2505.14777">KO: Kinetics-inspired Neural Optimizer with PDE Simulation Approaches</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/koala2/">KOALA++</a></td>
+<td>NeurIPS 2025</td>
+<td><a href="https://arxiv.org/abs/2506.04432">KOALA++: Efficient Kalman-Based Optimization with Gradient-Covariance Products</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/kourkoutassoftmaxflex/">Kourkoutas-Beta</a></td>
+<td>arXiv 2025</td>
+<td><a href="https://arxiv.org/abs/2508.12996">Kourkoutas-Beta: A Sunspike-Driven Adam Optimizer with Desert Flair</a></td>
+<td><a href="https://github.com/sck-at-ucy/kbeta">official</a></td>
+<td><code>KourkoutasSoftmaxFlex</code></td>
+</tr>
+<tr>
+<td><a href="../math/miadam/">MIAdam</a></td>
+<td>AAAI 2025</td>
+<td><a href="https://arxiv.org/abs/2412.12473">A Method for Enhancing Generalization of Adam by Multiple Integrations</a></td>
+<td><a href="https://github.com/LongJin-lab/MIAdam">official</a></td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/sgd-v/">μ²-SGD</a></td>
+<td>ICLR 2025</td>
+<td><a href="https://arxiv.org/abs/2304.04172">Do Stochastic, Feel Noiseless: Stable Stochastic Optimization via a Double Momentum Mechanism</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/gradorthograd/">⊥Grad (OrthoGrad)</a></td>
+<td>ICLR 2025</td>
+<td><a href="https://arxiv.org/abs/2501.04697">Grokking at the Edge of Numerical Stability</a></td>
+<td><a href="https://github.com/LucasPrietoAl/grokking-at-the-edge-of-numerical-stability">official</a></td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/overshoot/">Overshoot</a></td>
+<td>arXiv 2025</td>
+<td><a href="https://arxiv.org/abs/2501.09556">Overshoot: Taking advantage of future gradients in momentum-based stochastic optimization</a></td>
+<td><a href="https://github.com/kinit-sk/overshoot">official</a></td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/padamp/">PadamP</a></td>
+<td>arXiv 2025</td>
+<td><a href="https://arxiv.org/abs/2503.10005">Adaptive Moment Estimation Optimization Algorithm Using Projection Gradient for Deep Learning</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/simplifiedademamix/">Simplified-AdEMAMix</a></td>
+<td>arXiv 2025</td>
+<td><a href="https://arxiv.org/abs/2502.02431">Connections between Schedule-Free Optimizers, AdEMAMix, and Accelerated SGD Variants</a></td>
+<td><a href="https://github.com/DepenM/Simplified-AdEMAMix">official</a></td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/lyam/">LyAm</a></td>
+<td>arXiv 2025</td>
+<td><a href="https://arxiv.org/abs/2507.11262">LyAm: Robust Non-Convex Optimization for Stable Learning in Noisy Environments</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/nirmal/">NIRMAL</a></td>
+<td>arXiv 2025</td>
+<td><a href="https://arxiv.org/abs/2508.04293">Comparative Analysis of Novel NIRMAL Optimizer Against Adam and SGD with Momentum</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/scsadamw/">SCSAdamW</a></td>
+<td>arXiv 2025</td>
+<td><a href="https://arxiv.org/abs/2507.01241">Beyond First-Order: Training LLMs with Stochastic Conjugate Subgradients and AdamW</a></td>
+<td><a href="https://github.com/yhz0/scs-experiments">official</a></td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/skasgd/">SKA-SGD</a></td>
+<td>arXiv 2025</td>
+<td><a href="https://arxiv.org/abs/2505.07046">Streaming Krylov-Accelerated Stochastic Gradient Descent</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/softsignsgds3/">SoftSignSGD (S3)</a></td>
+<td>arXiv 2025</td>
+<td><a href="https://arxiv.org/abs/2507.06464">SoftSignSGD(S3): An Enhanced Optimizer for Practical DNN Training and Loss Spikes Minimization Beyond Adam</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/spam-v/">SPAM</a></td>
+<td>arXiv 2025</td>
+<td><a href="https://arxiv.org/abs/2501.06842">SPAM: Spike-Aware Adam with Momentum Reset for Stable LLM Training</a></td>
+<td><a href="https://github.com/TianjinYellow/SPAM-Optimizer">official</a></td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/vsgd/">VSGD</a></td>
+<td>TMLR 2025</td>
+<td><a href="https://arxiv.org/abs/2404.06549">Variational Stochastic Gradient Descent for Deep Neural Networks</a></td>
+<td><a href="https://github.com/generativeai-tue/vsgd">official</a></td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/zeta/">ZetA</a></td>
+<td>arXiv 2025</td>
+<td><a href="https://arxiv.org/abs/2508.02719">ZetA: A Riemann Zeta-Scaled Extension of Adam for Deep Learning</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/adagc/">AdaGC</a></td>
+<td>ICML 2026</td>
+<td><a href="https://arxiv.org/abs/2502.11034">AdaGC: Enhancing LLM Pretraining Stability via Adaptive Gradient Clipping</a></td>
+<td>—</td>
+<td><code>AdaGC</code></td>
+</tr>
+<tr>
+<td><a href="../math/anon/">Anon</a></td>
+<td>arXiv 2026</td>
+<td><a href="https://arxiv.org/abs/2605.02317">Anon: Extrapolating Adaptivity Beyond SGD and Adam</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/cadam2/">C-Adam</a></td>
+<td>arXiv 2026</td>
+<td><a href="https://arxiv.org/abs/2605.29273">A Theoretical and Experimental Study of a Novel Adaptive Learning Algorithm</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/dualadam/">DualAdam</a></td>
+<td>arXiv 2026</td>
+<td><a href="https://arxiv.org/abs/2603.07122">Combining Adam and its Inverse Counterpart to Enhance Generalization of Deep Learning Optimizers</a></td>
+<td><a href="https://github.com/LongJin-lab/DualAdam">official</a></td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/fanos/">FANoS</a></td>
+<td>arXiv 2026</td>
+<td><a href="https://arxiv.org/abs/2601.00889">FANoS-v2: Feedback-Controlled Momentum with Thermostat Damping for Lightweight Neural Optimization</a></td>
+<td><a href="https://github.com/nalin-dhiman/fanos">official</a></td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/gradpower/">GradPower</a></td>
+<td>ICML 2026</td>
+<td><a href="https://arxiv.org/abs/2505.24275">GradPower: Powering Gradients for Faster Language Model Pre-Training</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/homeadam/">HomeAdam</a></td>
+<td>arXiv 2026</td>
+<td><a href="https://arxiv.org/abs/2603.02649">HomeAdam: Adam and AdamW Algorithms Sometimes Go Home to Obtain Better Provable Generalization</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/novak/">NOVAK</a></td>
+<td>arXiv 2026</td>
+<td><a href="https://arxiv.org/abs/2601.07876">NOVAK: Unified adaptive optimizer for deep neural networks</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/psclipsgd/">PS-Clip-SGD</a></td>
+<td>arXiv 2026</td>
+<td><a href="https://arxiv.org/abs/2605.02701">Robust and Fast Training via Per-Sample Clipping</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/sparseopt/">SparseOpt</a></td>
+<td>ICML 2026</td>
+<td><a href="https://arxiv.org/abs/2605.27541">SparseOpt: Addressing Normalization-induced Gradient Skew in Sparse Training</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/stablespamgradientstabilizer/">Stable-SPAM / GradientStabilizer</a></td>
+<td>ICML 2026</td>
+<td><a href="https://arxiv.org/abs/2502.17055">GradientStabilizer: Fix the Norm, Not the Gradient</a></td>
+<td><a href="https://github.com/TianjinYellow/StableSPAM">official</a></td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/vradam/">VRAdam</a></td>
+<td>ICLR 2026</td>
+<td><a href="https://arxiv.org/abs/2505.13196">A Physics-Inspired Optimizer: Velocity Regularized Adam</a></td>
+<td><a href="https://github.com/pranavjv/vradam">official</a></td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/sparseadam/">SparseAdam</a></td>
+<td>—</td>
+<td>Adam variant for sparse gradients</td>
+<td><a href="https://github.com/pytorch/pytorch/blob/main/torch/optim/sparse_adam.py">official</a></td>
+<td><code>SparseAdam</code></td>
+</tr>
+<tr>
+<td><a href="../math/optmuon/">OptMuon</a></td>
+<td>arXiv 2026</td>
+<td><a href="https://arxiv.org/abs/2606.08783">OptMuon: Closed-Loop Orthogonalized Momentum Methods for Stochastic Optimization with Zero-Noise Optimality</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/fogo/">FOGO</a></td>
+<td>arXiv 2026</td>
+<td><a href="https://arxiv.org/abs/2606.10406">FOGO: Forgetting-aware Orthogonalization Optimizer</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/adamo/">AdamO</a></td>
+<td>ICML 2026</td>
+<td><a href="https://arxiv.org/abs/2606.09762">Preserving Plasticity in Continual Learning via Dynamical Isometry</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/madam/">MAdam</a></td>
+<td>arXiv 2026</td>
+<td><a href="https://arxiv.org/abs/2606.03904">MAdam: Metric-Aware Multi-Objective Adam</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/mucon/">MuCon</a></td>
+<td>arXiv 2026</td>
+<td><a href="https://arxiv.org/abs/2605.26459">MuCon: Clipped Muon Updates for LLM Training</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/numuon/">NuMuon</a></td>
+<td>arXiv 2026</td>
+<td><a href="https://arxiv.org/abs/2603.03597">NuMuon: Nuclear-Norm-Constrained Muon for Compressible LLM Training</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/mimuon/">MiMuon</a></td>
+<td>arXiv 2026</td>
+<td><a href="https://arxiv.org/abs/2605.19619">MiMuon: Mixed Muon Optimizer with Improved Generalization for Large Models</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/pion/">Pion</a></td>
+<td>arXiv preprint (cs.LG, stat.ML) 2026</td>
+<td><a href="https://arxiv.org/abs/2605.12492">Pion: A Spectrum-Preserving Optimizer via Orthogonal Equivalence Transformation</a></td>
+<td><a href="https://github.com/Sphere-AI-Lab/pion">official</a></td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/imuonintrinsicmuon/">iMuon (Intrinsic Muon)</a></td>
+<td>arXiv 2026</td>
+<td><a href="https://arxiv.org/abs/2605.09238">Intrinsic Muon: Spectral Optimization on Riemannian Matrix Manifolds</a></td>
+<td><a href="https://github.com/1bang118/manifold-intrinsic-muon">official</a></td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/muonogd/">Muon-OGD</a></td>
+<td>arXiv 2026</td>
+<td><a href="https://arxiv.org/abs/2605.08949">Muon-OGD: Muon-based Spectral Orthogonal Gradient Projection for LLM Continual Learning</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/newtonmuon/">Newton-Muon</a></td>
+<td>arXiv 2026</td>
+<td><a href="https://arxiv.org/abs/2604.01472">The Newton-Muon Optimizer</a></td>
+<td><a href="https://github.com/zhehangdu/Newton-Muon">official</a></td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/muoneq/">MuonEq</a></td>
+<td>arXiv 2026</td>
+<td><a href="https://arxiv.org/abs/2603.28254">MuonEq: Balancing Before Orthogonalization with Lightweight Equilibration</a></td>
+<td><a href="https://github.com/MaeChd/muon-eq">official</a></td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/rmnp/">RMNP</a></td>
+<td>arXiv 2026</td>
+<td><a href="https://arxiv.org/abs/2603.20527">RMNP: Row-Momentum Normalized Preconditioning for Scalable Matrix-Based Optimization</a></td>
+<td><a href="https://github.com/Dominator-Index/RMNP">official</a></td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/mud/">MUD</a></td>
+<td>arXiv preprint 2026</td>
+<td><a href="https://arxiv.org/abs/2603.17970">Beyond Muon: MUD (MomentUm Decorrelation) for Faster Transformer Training</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/namo/">NAMO</a></td>
+<td>arXiv 2026</td>
+<td><a href="https://arxiv.org/abs/2602.17080">Adam Improves Muon: Adaptive Moment Estimation with Orthogonalized Momentum</a></td>
+<td><a href="https://github.com/minxin-zhg/namo">official</a></td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/specmuon/">SpecMuon</a></td>
+<td>arXiv 2026</td>
+<td><a href="https://arxiv.org/abs/2602.16167">Muon with Spectral Guidance: Efficient Optimization for Scientific Machine Learning</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/aro/">ARO</a></td>
+<td>arXiv 2026</td>
+<td><a href="https://arxiv.org/abs/2602.09006">ARO: A New Lens On Matrix Optimization For Large Models</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/prism/">PRISM</a></td>
+<td>arXiv 2026</td>
+<td><a href="https://arxiv.org/abs/2602.03096">PRISM: Structured Optimization via Anisotropic Spectral Shaping</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/mcsdspel/">MCSD / SPEL</a></td>
+<td>arXiv 2026</td>
+<td><a href="https://arxiv.org/abs/2601.21487">Manifold constrained steepest descent</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/varianceadaptivemuonmuonnsrmuonvs/">Variance-Adaptive Muon (Muon-NSR / Muon-VS)</a></td>
+<td>arXiv 2026</td>
+<td><a href="https://arxiv.org/abs/2601.14603">Variance-Adaptive Muon: Accelerating LLM Pretraining with NSR-Modulated and Variance-Scaled Momentum</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/muonall/">MuonAll</a></td>
+<td>arXiv 2025</td>
+<td><a href="https://arxiv.org/abs/2511.06086">MuonAll: Muon Variant for Efficient Finetuning of Large Language Models</a></td>
+<td><a href="https://github.com/Saurabh750/optimizer">official</a></td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/gluon/">Gluon</a></td>
+<td>arXiv 2025 (also accepted at ICML 2025 HiLD workshop)</td>
+<td><a href="https://arxiv.org/abs/2505.13416">Gluon: Making Muon &amp; Scion Great Again! (Bridging Theory and Practice of LMO-based Optimizers for LLMs)</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/lpsgdlpsgdm/">LPSGD / LPSGDM</a></td>
+<td>arXiv 2026</td>
+<td><a href="https://arxiv.org/abs/2606.02078">Beyond L2-norm and L-infinity-norm: A Curvature-Inspired ell_p-Norm Scheme for Deep Neural Networks</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/absignsgd/">ABSignSGD</a></td>
+<td>ICLR 2026</td>
+<td><a href="https://openreview.net/forum?id=NQsdnYkCar">Arbitrary-Order Block SignSGD for Memory-Efficient LLM Fine-Tuning</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/stosignsgd/">StoSignSGD</a></td>
+<td>arXiv 2026</td>
+<td><a href="https://arxiv.org/abs/2604.15416">StoSignSGD: Unbiased Structural Stochasticity Fixes SignSGD for Training Large Language Models</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/hybridsignsgdsgdswitching/">Hybrid SignSGD-SGD switching</a></td>
+<td>arXiv 2026</td>
+<td><a href="https://arxiv.org/abs/2604.25550">Enhancing SignSGD: Small-Batch Convergence Analysis and a Hybrid Switching Strategy</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/softsignumsoftmuon/">SoftSignum / SoftMuon</a></td>
+<td>ICML 2026</td>
+<td><a href="https://arxiv.org/abs/2605.31371">Softsign: Smooth Sign in Your Optimizer For Better Parameter Heterogeneity Handling</a></td>
+<td><a href="https://github.com/brain-lab-research/softsign">official</a></td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/acceleratedsigngd/">Accelerated SignGD</a></td>
+<td>arXiv 2025</td>
+<td><a href="https://arxiv.org/abs/2508.18510">Norm-Constrained Flows and Sign-Based Optimization: Theory and Algorithms</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/clion/">CLion</a></td>
+<td>arXiv 2026</td>
+<td><a href="https://arxiv.org/abs/2604.14587">CLion: Efficient Cautious Lion Optimizer with Enhanced Generalization</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/olion/">OLion</a></td>
+<td>arXiv 2026</td>
+<td><a href="https://arxiv.org/abs/2602.01105">OLion: Approaching the Hadamard Ideal by Intersecting Spectral and ell_{infty} Implicit Biases</a></td>
+<td><a href="https://github.com/kv-wang/OLion">official</a></td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/mgup/">MGUP</a></td>
+<td>NeurIPS 2025</td>
+<td><a href="https://openreview.net/forum?id=TDFSKAspoQ">MGUP: A Momentum-Gradient Alignment Update Policy for Stochastic Optimization</a></td>
+<td><a href="https://github.com/MaeChd/MGUP">official</a></td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/magma/">Magma</a></td>
+<td>arXiv 2026</td>
+<td><a href="https://arxiv.org/abs/2602.15322">On Surprising Effectiveness of Masking Updates in Adaptive Optimizers</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/aggc/">AGGC</a></td>
+<td>ACL 2026</td>
+<td><a href="https://arxiv.org/abs/2601.11864">AGGC: Adaptive Group Gradient Clipping for Stabilizing Large Language Model Training</a></td>
+<td><a href="https://github.com/ZhiyuanLi218/AGGC">official</a></td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/clippedscion/">Clipped Scion</a></td>
+<td>NeurIPS 2025</td>
+<td><a href="https://arxiv.org/abs/2506.01913">Generalized Gradient Norm Clipping &amp; Non-Euclidean (L_0,L_1)-Smoothness</a></td>
+<td><a href="https://github.com/LIONS-EPFL/ClippedScion">official</a></td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/spectra/">SPECTRA</a></td>
+<td>ICML 2026</td>
+<td><a href="https://arxiv.org/abs/2603.14315">Enhancing LLM Training via Spectral Clipping</a></td>
+<td><a href="https://github.com/mlolab/llm-spectral-clipping">official</a></td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/spectralclippingmatrixvalued/">Spectral Clipping (matrix-valued)</a></td>
+<td>arXiv 2026</td>
+<td><a href="https://arxiv.org/abs/2605.11838">Gradient Clipping Beyond Vector Norms: A Spectral Approach for Matrix-Valued Parameters</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/spamp/">SPAMP</a></td>
+<td>ACM Multimedia Asia 2025 (7th ACM International Conference on Multimedia in Asia)</td>
+<td><a href="https://arxiv.org/abs/2510.01578">Gradient Shaping Beyond Clipping: A Functional Perspective on Update Magnitude Control</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/nucgd/">NucGD</a></td>
+<td>arXiv 2026</td>
+<td><a href="https://arxiv.org/abs/2603.22824">Towards The Implicit Bias on Multiclass Separable Data Under Norm Constraints</a></td>
+<td><a href="https://github.com/Tsokarsic/observing-the-implicit-bias-on-multiclass-seperable-data">official</a></td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/batchedtransportedscion/">Batched / Transported Scion</a></td>
+<td>arXiv 2026</td>
+<td><a href="https://arxiv.org/abs/2605.18528">Scale-Invariant Neural Network Optimization: Norm Geometry and Heavy-Tailed Noise</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/emabiascorrectediterateaveraging/">EMA bias-corrected iterate averaging</a></td>
+<td>NeurIPS 2025 Workshop (OPT 2025)</td>
+<td><a href="https://arxiv.org/abs/2508.00180">EMA Without the Lag: Bias-Corrected Iterate Averaging Schemes</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/rgradavg/">RGrad-Avg</a></td>
+<td>OPT 2025 (17th Annual Workshop on Optimization for Machine Learning, co-located with NeurIPS 2025)</td>
+<td><a href="https://opt-ml.org/papers/2025/paper7.pdf">On Riemannian Gradient Descent Algorithm using gradient averaging</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/sgdwithadaptivepreconditioning/">SGD with adaptive preconditioning</a></td>
+<td>ICLR 2026</td>
+<td><a href="https://arxiv.org/abs/2506.23803">SGD with Adaptive Preconditioning: Unified Analysis and Momentum Acceleration</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/htmuon/">HTMuon</a></td>
+<td>arXiv 2026</td>
+<td><a href="https://arxiv.org/abs/2603.10067">HTMuon: Improving Muon via Heavy-Tailed Spectral Correction</a></td>
+<td><a href="https://github.com/TDCSZ327/HTmuon">official</a></td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/marsm/">MARS-M</a></td>
+<td>arXiv 2025</td>
+<td><a href="https://arxiv.org/abs/2510.21800">MARS-M: When Variance Reduction Meets Matrices</a></td>
+<td><a href="https://github.com/AGI-Arena/MARS/tree/main/MARS_M">official</a></td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/dropmuon/">Drop-Muon</a></td>
+<td>arXiv 2025</td>
+<td><a href="https://arxiv.org/abs/2510.02239">Drop-Muon: Update Less, Converge Faster</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/muon-v/">Muon+</a></td>
+<td>arXiv 2026</td>
+<td><a href="https://arxiv.org/abs/2602.21545">MUON+: Towards More Effective Muon via One Additional Normalization Step for LLM Pre-training</a></td>
+<td><a href="https://github.com/K1seki221/MuonPlus">official</a></td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/trasmuon/">TrasMuon</a></td>
+<td>ICLR 2026 Workshop Sci4DL</td>
+<td><a href="https://arxiv.org/abs/2602.13498">TrasMuon: Trust-Region Adaptive Scaling for Orthogonalized Momentum Optimizers</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/adamshang/">Adam-SHANG</a></td>
+<td>arXiv 2026</td>
+<td><a href="https://arxiv.org/abs/2605.12878">Adam-SHANG: A Convergent Adam-Type Method for Stochastic Smooth Convex Optimization</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/emanesterov/">EMA-Nesterov</a></td>
+<td>arXiv 2026</td>
+<td><a href="https://arxiv.org/abs/2605.25395">EMA-Nesterov: Stabilizing Nesterov's Lookahead for Accelerated Deep Learning Optimization</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/sadam2/">S-Adam</a></td>
+<td>arXiv 2026</td>
+<td><a href="https://arxiv.org/abs/2605.29547">Singularity-aware Optimization via Randomized Geometric Probing: Towards Stable Non-smooth Optimization</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/iadapidadg/">IAdaPID-ADG</a></td>
+<td>arXiv 2026</td>
+<td><a href="https://arxiv.org/abs/2605.21968">An Improved Adaptive PID Optimizer with Enhanced Convergence and Stability for Deep Learning</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/ctagd/">CT-AGD</a></td>
+<td>arXiv 2026</td>
+<td><a href="https://arxiv.org/abs/2605.16017">Accelerated Gradient Descent for Faster Convergence with Minimal Overhead</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/gpageneralizedprimalaveraging/">GPA (Generalized Primal Averaging)</a></td>
+<td>arXiv 2025</td>
+<td><a href="https://arxiv.org/abs/2512.17131">Smoothing DiLoCo with Primal Averaging for Faster Training of LLMs</a></td>
+<td><a href="https://github.com/facebookresearch/optimizers">official</a></td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/snoo/">SNOO</a></td>
+<td>arXiv 2025</td>
+<td><a href="https://arxiv.org/abs/2510.15830">SNOO: Step-K Nesterov Outer Optimizer - The Surprising Effectiveness of Nesterov Momentum Applied to Pseudo-Gradients</a></td>
+<td><a href="https://github.com/vishal9-team/torchtitan-snoo">official</a></td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/riemannion/">Riemannion</a></td>
+<td>ICLR 2026</td>
+<td><a href="https://arxiv.org/abs/2507.12142">LoRA meets Riemannion: Muon Optimizer for Parametrization-independent Low-Rank Adapters</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/optimalprojectionfreeadaptivesgd/">Optimal Projection-Free Adaptive SGD</a></td>
+<td>arXiv 2026</td>
+<td><a href="https://arxiv.org/abs/2604.02505">Optimal Projection-Free Adaptive SGD for Matrix Optimization</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/adamcb/">AdamCB</a></td>
+<td>ICLR 2025</td>
+<td><a href="https://arxiv.org/abs/2512.06795">ADAM Optimization with Adaptive Batch Selection</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/kalmanadam/">Kalman-Adam</a></td>
+<td>Knowledge-Based Systems 2026</td>
+<td><a href="https://doi.org/10.1016/j.knosys.2026.115907">Kalman-Adam: Optimal bayesian moment estimation for memory-Efficient and generalizable deep learning</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/adamhdadamhuberdecay/">AdamHD (AdamHuberDecay)</a></td>
+<td>NeurIPS 2025 Workshop (ScaleOpt: GPU-Accelerated and Scalable Optimization)</td>
+<td><a href="https://arxiv.org/abs/2511.14721">AdamHD: Decoupled Huber Decay Regularization for Language Model Pre-Training</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/mvngrad/">MVN-Grad</a></td>
+<td>arXiv 2026</td>
+<td><a href="https://arxiv.org/abs/2602.10204">Adaptive Optimization via Momentum on Variance-Normalized Gradients</a></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="../math/compositionalmuoncm/">Compositional Muon (CM)</a></td>
+<td>Tilde Research blog 2026</td>
+<td><a href="https://blog.tilderesearch.com/blog/compositional-muon">Towards Compositional Steepest Descent</a></td>
+<td><a href="https://github.com/tilde-research/comp-muon-release">official</a></td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Apache-2.0 · Muhammad Junaid Ali Asif Raja
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.tracking", "navigation.instant", "navigation.instant.progress", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
