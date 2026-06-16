@@ -49,3 +49,6 @@ Thumbs.db
 # Local tooling
 .claude/
 .lycheecache
+
+# MkDocs build output
+/site/

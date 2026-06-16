@@ -1,0 +1,95 @@
+/* zij — Material theme refinements to match junaidaliop.github.io (al-folio).
+   Roboto body (set in mkdocs.yml font.text), Roboto Slab headings,
+   Fira Code mono (font.code). Brand: violet #7C3AED, cyan #22D3EE. */
+
+/* Roboto Slab for headings — Roboto and Fira Code are loaded by Material. */
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;400;500;700&display=swap');
+
+/* ---- Brand palette (light) ---- */
+:root {
+  --md-primary-fg-color: #7C3AED;        /* violet */
+  --md-primary-fg-color--dark: #6D28D9;  /* deeper violet (hover/active) */
+  --md-primary-fg-color--light: #A78BFA; /* light violet */
+  --md-accent-fg-color: #22D3EE;         /* cyan */
+}
+
+/* ---- Brand palette (dark / slate) ---- */
+[data-md-color-scheme="slate"] {
+  --md-primary-fg-color: #A78BFA;        /* lighter violet reads better on dark */
+  --md-accent-fg-color: #22D3EE;         /* cyan */
+  --md-default-bg-color: #1b1430;        /* deep violet page background */
+  --md-default-bg-color--light: #241a3a; /* slightly lifted surface */
+}
+
+/* ---- Typography: Roboto Slab headings, academic weight ---- */
+.md-typeset h1,
+.md-typeset h2,
+.md-typeset h3,
+.md-typeset h4,
+.md-header__title,
+.md-nav__title {
+  font-family: "Roboto Slab", serif;
+  font-weight: 500;
+}
+
+/* Comfortable reading rhythm for body copy. */
+.md-typeset {
+  line-height: 1.7;
+}
+
+/* Justified prose for an academic, typeset feel — math pages and all body copy.
+   hyphens:auto keeps the inter-word gaps tight (html[lang=en] is set by theme). */
+.md-typeset p {
+  text-align: justify;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+
+/* ---- Header logo (white زِيج wordmark on the violet bar) ---- */
+.md-header__button.md-logo img,
+.md-header__button.md-logo svg {
+  height: 1.5rem;
+  width: auto;
+}
+
+/* Keep a deep-violet header in dark mode so the white wordmark stays legible
+   (slate primary is a light violet, which would wash the logo out). */
+[data-md-color-scheme="slate"] .md-header,
+[data-md-color-scheme="slate"] .md-tabs {
+  background-color: #2D1F4A;
+}
+
+/* ---- Subtle polish ---- */
+
+/* Faint primary tint on table header rows. */
+.md-typeset table th {
+  background-color: color-mix(in srgb, var(--md-primary-fg-color) 8%, transparent);
+}
+
+/* Catalog tables: keep wide optimizer tables readable. */
+.md-typeset table:not([class]) {
+  font-size: 0.78rem;
+}
+
+.md-typeset table:not([class]) th {
+  white-space: nowrap;
+}
+
+.md-typeset table:not([class]) code {
+  font-size: 0.85em;
+}
+
+/* Display math: allow horizontal scroll for long update rules. */
+.md-typeset .arithmatex {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+mjx-container[display="true"] {
+  margin: 0.6em 0;
+}
+
+/* Back-to-canon link spacing under the rule on each math page. */
+.md-typeset hr + p {
+  margin-top: 0.8em;
+}
