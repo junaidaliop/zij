@@ -3,6 +3,12 @@
 All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [0.1.1]
+
+- Package metadata now links the documentation site
+  (https://junaidaliop.github.io/zij/) as the homepage, alongside the source
+  repository.
+
 ## [0.1.0]
 
 Initial release.

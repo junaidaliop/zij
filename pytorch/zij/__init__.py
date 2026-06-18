@@ -134,7 +134,7 @@ from .registry import (
     load_optimizer,
 )
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 
 for _cls in (
     Adafactor,

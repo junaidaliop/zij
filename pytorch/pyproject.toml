@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "zij"
-version = "0.1.0"
+version = "0.1.1"
 description = "A comprehensive library of deep learning optimizers"
 readme = "README.md"
 requires-python = ">=3.10"
@@ -24,7 +24,8 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/junaidaliop/zij"
+Homepage = "https://junaidaliop.github.io/zij/"
+Documentation = "https://junaidaliop.github.io/zij/"
 Repository = "https://github.com/junaidaliop/zij"
 Issues = "https://github.com/junaidaliop/zij/issues"
 
